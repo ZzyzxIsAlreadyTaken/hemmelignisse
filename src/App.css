@@ -12,12 +12,16 @@
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
 }
 
-h1 {
-  color: #e74c3c;
+.container h1 {
+  color: #e74c3c !important;
   margin-bottom: 2rem;
   font-size: 2.5em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
 }
 
 .input-section {
@@ -36,8 +40,8 @@ input {
   background: rgba(255, 255, 255, 0.9);
 }
 
-button {
-  background-color: #e74c3c;
+.draw-button {
+  background-color: #e74c3c !important;
   color: white;
   padding: 1rem 2rem;
   border: none;
@@ -47,8 +51,8 @@ button {
   transition: background-color 0.3s;
 }
 
-button:hover {
-  background-color: #c0392b;
+.draw-button:hover {
+  background-color: #c0392b !important;
 }
 
 .result {
@@ -76,7 +80,7 @@ button:hover {
   }
 
   h1 {
-    font-size: 2em;
+    font-size: 3em;
   }
 
   .input-section {
@@ -94,35 +98,51 @@ body {
   overflow-x: hidden;
 }
 
-body::before {
-  content: '❄';
-  position: fixed;
-  font-size: 20px;
-  color: white;
-  animation: fall 10s linear infinite;
-  top: -20px;
-  left: 50%;
-}
-
-@keyframes fall {
+@keyframes snowfall {
   0% {
-    transform: translateY(-20px) translateX(0) rotate(0deg);
+    transform: translateY(-20px) rotate(0deg);
     opacity: 1;
   }
   100% {
-    transform: translateY(100vh) translateX(100px) rotate(360deg);
-    opacity: 0;
+    transform: translateY(calc(100vh - 20px)) rotate(360deg);
+    opacity: 0.3;
   }
 }
 
-/* Legg til flere snøfnugg med forskjellige animasjonstider */
+/* Create a snowflake container */
 body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;  /* Put behind content */
+}
+
+body::before,
+body::after,
+#root::before,
+#root::after,
+.container::before,
+.container::after{
   content: '❄';
   position: fixed;
-  font-size: 15px;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  animation: snowfall linear infinite;
+  pointer-events: none;
   color: white;
-  animation: fall 15s linear infinite;
 }
+
+body::before { left: 15%; animation-duration: 10s; animation-delay: -5s; font-size: 1.2rem; }
+body::after { left: 35%; animation-duration: 15s; font-size: 1rem; }
+#root::before { left: 55%; animation-duration: 12s; animation-delay: -2s; font-size: 1.4rem; }
+#root::after { left: 75%; animation-duration: 8s; animation-delay: -4s; font-size: 1.1rem; }
+.container::before { left: 25%; animation-duration: 13s; animation-delay: -6s; font-size: 1.3rem; }
+.container::after { left: 85%; animation-duration: 9s; animation-delay: -8s; font-size: 2rem;}
+.container::first-line { left: 65%; animation-duration: 11s; animation-delay: -1s; }
 
 .logo {
   height: 6em;
@@ -197,4 +217,39 @@ body::after {
   background: #f8f8f8;
   border-radius: 8px;
   text-align: center;
+}
+
+.assignments-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.assignments-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.assignments-list li {
+  padding: 1rem;
+  margin: 0.5rem 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+
+.assignments-list li:hover {
+  transform: translateX(5px);
+}
+
+html, body {
+  overflow-x: hidden;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
 }

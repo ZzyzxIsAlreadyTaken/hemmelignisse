@@ -6,7 +6,9 @@ import { BrowserRouter } from "react-router-dom";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter basename="/hemmelignisse/">
+    <BrowserRouter
+      basename={import.meta.env.MODE === "production" ? "/hemmelignisse" : "/"}
+    >
       <App />
     </BrowserRouter>
   </StrictMode>

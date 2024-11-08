@@ -56,7 +56,7 @@ export function DrawPage() {
 
   return (
     <div className="container">
-      <h1>Trekk din hemmelige venn 🎅</h1>
+      <h1>EUC Hemmelig Nisse 🎅</h1>
       <div className="draw-container">
         <select
           value={selectedPerson}
