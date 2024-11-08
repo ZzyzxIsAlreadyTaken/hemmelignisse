@@ -58,6 +58,8 @@ export function DrawPage() {
     <div className="container">
       <h1>EUC Hemmelig Nisse 🎅</h1>
       <div className="draw-container">
+        <div>Velg deg selv i dropdown og tykk på "Trekk person"</div>
+        <br></br>
         <select
           value={selectedPerson}
           onChange={(e) => {
@@ -75,7 +77,6 @@ export function DrawPage() {
               </option>
             ))}
         </select>
-
         <button
           onClick={handleDraw}
           disabled={!selectedPerson || !!assignedPerson}
@@ -83,16 +84,13 @@ export function DrawPage() {
         >
           Trekk person
         </button>
-
         {error && <p className="error">{error}</p>}
-
         {assignedPerson && (
           <div className="result">
             <p>Du er hemmelig nisse for:</p>
             <p className="assigned-person">{assignedPerson}</p>
           </div>
         )}
-
         <div className="status">
           <p style={{ color: "white" }}>
             Antall personer igjen: {people.length - takenPeople.length}
